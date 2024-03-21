@@ -1,0 +1,16 @@
+spring:
+  application:
+    name: metrics-producer
+  kafka:
+    producer:
+      bootstrap-servers: ${BOOTSTRAP_SERVERS:localhost:29092}
+      key-serializer: org.apache.kafka.common.serialization.StringSerializer
+      value-serializer: org.apache.kafka.common.serialization.StringSerializer
+      topic: metrics-topic
+server:
+  port: 8081
+management:
+  endpoints:
+    web:
+      exposure:
+        include: metrics
