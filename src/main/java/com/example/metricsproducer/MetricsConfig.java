@@ -8,7 +8,7 @@ import org.springframework.web.client.RestTemplate;
 public class MetricsConfig {
 
   @Bean
-  public RestTemplate template(){
+  public RestTemplate template() {
     return new RestTemplate();
   }
 }
