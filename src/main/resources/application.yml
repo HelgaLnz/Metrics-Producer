@@ -2,11 +2,20 @@ spring:
   application:
     name: metrics-producer
   kafka:
+    security:
+      protocol: "SSL"
+    ssl:
+      trust-store-location: file:./certs/kafka.zookeeper.truststore.jks
+      trust-store-password: secret
+      key-store-location: file:./certs/kafka.zookeeper.keystore.jks
+      key-password: secret
+      key-store-password: secret
     producer:
       bootstrap-servers: ${BOOTSTRAP_SERVERS:localhost:29092}
       key-serializer: org.apache.kafka.common.serialization.StringSerializer
       value-serializer: org.springframework.kafka.support.serializer.JsonSerializer
       topic: metrics-topic
+
 server:
   port: 8081
 management:

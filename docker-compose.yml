@@ -17,8 +17,15 @@ services:
     environment:
       KAFKA_BROKER_ID: 1
       KAFKA_ZOOKEEPER_CONNECT: zookeeper:2181
-      KAFKA_ADVERTISED_LISTENERS: PLAINTEXT://kafka:9092,PLAINTEXT_HOST://localhost:29092
-      KAFKA_LISTENER_SECURITY_PROTOCOL_MAP: PLAINTEXT:PLAINTEXT,PLAINTEXT_HOST:PLAINTEXT
-      KAFKA_INTER_BROKER_LISTENER_NAME: PLAINTEXT
+      PASSWORD: secret
+      KAFKA_ADVERTISED_LISTENERS: PLAINTEXT://kafka:9092,SSL://localhost:29092
+      KAFKA_SSL_KEYSTORE_FILENAME: '/certs/kafka.zookeeper.keystore.jks'
+      KAFKA_SSL_KEYSTORE_CREDENTIALS: '/certs/ssl.cert'
+      KAFKA_SSL_KEY_CREDENTIALS: '/certs/ssl.cert'
+      KAFKA_SSL_TRUSTSTORE_FILENAME: '/certs/kafka.zookeeper.truststore.jks'
+      KAFKA_SSL_KEYSTORE_TYPE: JKS
+      KAFKA_SSL_TRUSTSTOREE_TYPE: JKS
       KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR: 1
       KAFKA_CREATE_TOPICS: "metrics-topic:1:1"
+    volumes:
+      - ./certs/:/etc/kafka/secrets/certs
